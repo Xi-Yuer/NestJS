@@ -82,6 +82,10 @@ export class CreateUserDto {
   @IsDateString({}, { message: '生日必须是有效的日期格式' })
   birthDate?: string;
 
+  @ApiProperty()
+  @IsOptional()
+  isActive?: boolean;
+
   @ApiProperty({
     description: '性别必须是 male, female, 或 other',
     enum: ['male', 'female', 'other'],

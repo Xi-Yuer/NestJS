@@ -1,0 +1,35 @@
+import { IsBoolean, IsNotEmpty, IsOptional, IsString, Max, Min } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+
+export class QueryUserDto {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  readonly username: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  readonly email: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  readonly phoneNumber: string;
+
+  @ApiProperty({ required: false, type: Boolean })
+  @IsOptional()
+  @IsBoolean()
+  readonly isActive: boolean;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  // 最大值500 最小值1
+  @Min(1)
+  @Max(500)
+  readonly pageSize: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  readonly limit: number;
+}
