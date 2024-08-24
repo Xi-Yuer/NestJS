@@ -23,13 +23,14 @@ export class QueryUserDto {
   readonly isActive: boolean;
 
   @ApiProperty()
-  @IsNotEmpty()
-  // 最大值500 最小值1
-  @Min(1)
-  @Max(500)
+  @IsNotEmpty({ message: 'page 不能为空' })
+  @Min(1, { message: 'page 不能小于 1' })
+  @Max(500, { message: 'page 不能大于 500' })
   readonly pageSize: number;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'limit 不能为空' })
+  @Min(1, { message: 'limit 不能小于 1' })
+  @Max(500, { message: 'limit 不能大于 500' })
   readonly limit: number;
 }
