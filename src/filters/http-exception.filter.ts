@@ -7,12 +7,13 @@ export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
+
+    // 检测是否是 sql 错误
     const status = exception instanceof HttpException
       ? exception.getStatus()
       : HttpStatus.INTERNAL_SERVER_ERROR;
     const msg = exception instanceof HttpException
-      ? exception.getResponse()
-      : '服务器错误';
+      ? exception.getResponse() : exception instanceof Error ? exception.message : '服务器错误';
 
     const errorResponse: ApiResponse<null> = {
       success: false,
