@@ -1,11 +1,11 @@
 import { NestFactory } from '@nestjs/core';
-import { RootModule } from './root.module';
+import { RootModule } from './modules/root/root.module';
 import 'reflect-metadata';
-import { useGlobalApp } from './global/useGlobalApp';
+import { useInitial } from './initial/useInitial';
 
 async function bootstrap() {
   const app = await NestFactory.create(RootModule);
-  useGlobalApp(app);
+  useInitial(app);
   await app.listen(3000);
 }
 

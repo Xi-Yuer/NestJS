@@ -1,7 +1,7 @@
-import { setUpSwagger } from '../common/swagger/swagger';
+import { setUpSwagger } from '../swagger/swagger';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 
-export function useGlobalApp(app: INestApplication) {
+export function useInitial(app: INestApplication) {
   setUpSwagger(app);
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,              // 自动删除请求对象中不在 DTO 中定义的属性
