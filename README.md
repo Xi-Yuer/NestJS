@@ -1,87 +1,109 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestJS 项目结构说明
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+## 目录结构
 
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ npm install
+```
+src/
+├── api/
+│   ├── auth/
+│   │   ├── dto/
+│   │   ├── auth.controller.ts
+│   │   ├── auth.module.ts
+│   │   └── auth.service.ts
+│   └── users/
+│       ├── dto/
+│       ├── users.controller.ts
+│       ├── users.module.ts
+│       └── users.service.ts
+├── entities/
+│   └── user.ts
+├── filters/
+│   └── http-exception.filter.ts
+├── initial/
+│   └── useInitial.ts
+├── inject/
+│   ├── auth.guard.inject.ts
+│   ├── auth.service.inject.ts
+│   └── response.inject.ts
+├── modules/
+│   ├── database/
+│   ├── environment/
+│   ├── protected/
+│   ├── redis-cache/
+│   ├── response/
+│   ├── root/
+│   └── session/
+├── services/
+│   └── error.service.ts
+├── swagger/
+│   └── swagger.ts
+└── main.ts
 ```
 
-## Compile and run the project
+## 文件说明
 
-```bash
-# development
-$ npm run start
+### 1. 入口文件
 
-# watch mode
-$ npm run start:dev
+- `src/main.ts`: 应用程序的入口点,负责启动 NestJS 应用。
 
-# production mode
-$ npm run start:prod
-```
+### 2. API 模块
 
-## Run tests
+### 3. 实体
 
-```bash
-# unit tests
-$ npm run test
+- `src/entities/user.ts`: 定义 User 实体,对应数据库中的用户表。
 
-# e2e tests
-$ npm run test:e2e
+### 4. 过滤器
 
-# test coverage
-$ npm run test:cov
-```
+- `src/filters/http-exception.filter.ts`: 全局 HTTP 异常过滤器。
 
-## Resources
+### 5. 初始化
 
-Check out a few resources that may come in handy when working with NestJS:
+- `src/initial/useInitial.ts`: 包含应用程序初始化逻辑。
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### 6. 依赖注入
 
-## Support
+- `src/inject/auth.guard.inject.ts`: 认证守卫的依赖注入。
+- `src/inject/auth.service.inject.ts`: 认证服务的依赖注入。
+- `src/inject/response.inject.ts`: 响应服务的依赖注入。
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them,
-please [read more here](https://docs.nestjs.com/support).
+### 7. 模块
 
-## Stay in touch
+- `src/modules/database/database.module.ts`: 数据库模块配置。
+- `src/modules/environment/environment.module.ts`: 环境变量模块配置。
+- `src/modules/protected/protected.module.ts`: 受保护路由模块配置。
+- `src/modules/redis-cache/redis-cache.module.ts`: Redis 缓存模块配置。
+- `src/modules/response/response.module.ts`: 响应处理模块配置。
+- `src/modules/root/root.module.ts`: 根模块配置,整合所有其他模块。
+- `src/modules/session/session.module.ts`: 会话管理模块配置。
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 8. 服务
 
-## License
+- `src/services/error.service.ts`: 错误处理服务。
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### 9. Swagger
+
+- `src/swagger/swagger.ts`: Swagger API 文档配置。
+
+## 文件组织架构说明
+
+1. 该项目采用模块化的结构,将不同功能分散到各个模块中。
+
+2. `api` 目录包含了具体的业务逻辑,如用户管理和认证。
+
+3. `entities` 目录定义了数据库实体。
+
+4. `filters` 目录包含全局异常过滤器。
+
+5. `initial` 目录包含应用程序初始化逻辑。
+
+6. `inject` 目录包含各种依赖注入的实现。
+
+7. `modules` 目录包含了各种功能模块的配置。
+
+8. `services` 目录包含通用服务,如错误处理服务。
+
+9. `swagger` 目录包含 API 文档相关配置。
+
+10. 主文件 `main.ts` 作为应用程序的入口点,负责启动整个应用。
+
+这种结构使得项目具有良好的可维护性和可扩展性,各个模块之间职责明确,耦合度低。

@@ -1,25 +1,18 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiResponse } from '../inject/response.inject';
+import { ErrorService } from '../services/error.service';
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
+  constructor(private readonly errorService: ErrorService) {}
+
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    const status = exception instanceof HttpException
-      ? exception.getStatus()
-      : HttpStatus.INTERNAL_SERVER_ERROR;
-    const msg = exception instanceof HttpException
-      ? exception.getResponse() : exception instanceof Error ? exception.message : '服务器错误';
-
-    const errorResponse: ApiResponse<null> = {
-      success: false,
-      msg,
-      code: status,
-    };
+    const httpException = this.errorService.handleError(exception as Error | HttpException);
+    
     response
-      .status(status)
-      .json(errorResponse);
+      .status(httpException.getStatus())
+      .json(httpException.getResponse());
   }
 }

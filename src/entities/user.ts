@@ -5,8 +5,12 @@ import { IsEmail, IsNotEmpty, Length, Matches } from 'class-validator';
 @Unique(['email']) // 确保 email 唯一
 @Unique(['username']) // 确保 username 唯一
 export class User {
-  @PrimaryGeneratedColumn('uuid') // 使用 UUID 作为主键
-  id: string;
+  @PrimaryGeneratedColumn('increment', {
+    type: 'int',
+    name: 'id',
+    comment: '用户ID',
+  })
+  id: number;
 
   @Column({ length: 50 })
   @IsNotEmpty({ message: '用户名不能为空' })

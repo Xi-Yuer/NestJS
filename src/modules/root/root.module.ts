@@ -8,6 +8,8 @@ import { HttpExceptionFilter } from '../../filters/http-exception.filter';
 import { RedisCacheModule } from '../redis-cache/redis-cache.module';
 import { SessionModule } from '../session/session.module';
 import { ProtectedModule } from '../protected/protected.module';
+import { ErrorService } from 'src/services/error.service';
+import { AuthModule } from 'src/api/auth/auth.module';
 
 @Module({
   imports: [
@@ -20,15 +22,16 @@ import { ProtectedModule } from '../protected/protected.module';
     DatabaseModule,
     RedisCacheModule,
     // 业务
+    AuthModule,
     UsersModule,
     SessionModule,
   ],
   providers: [
+    ErrorService,
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
     },
   ],
 })
-export class RootModule {
-}
+export class RootModule {}
