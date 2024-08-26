@@ -6,18 +6,22 @@ import { ResponseModule } from '../response/response.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from '../../filters/http-exception.filter';
 import { RedisCacheModule } from '../redis-cache/redis-cache.module';
+import { SessionModule } from '../session/session.module';
+import { ProtectedModule } from '../protected/protected.module';
 
 @Module({
   imports: [
     // 工具类
     ResponseModule,
+    EnvironmentModule,
+    ResponseModule,
+    ProtectedModule,
     // 数据库
     DatabaseModule,
     RedisCacheModule,
     // 业务
     UsersModule,
-    EnvironmentModule,
-    ResponseModule,
+    SessionModule,
   ],
   providers: [
     {

@@ -1,13 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { QueryUserDto } from './dto/query-user.dto';
+import { AuthGuardInject } from '../../inject/auth.guard.inject';
 
 
 @ApiTags('用户管理')
 @Controller('users')
+@UseGuards(AuthGuardInject)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {
   }

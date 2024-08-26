@@ -5,4 +5,4 @@ import { AuthServiceInject } from '../../inject/auth.service.inject';
   providers: [AuthServiceInject],
   exports: [AuthServiceInject],
 })
-export class AuthModule {}
+export class SessionModule {}

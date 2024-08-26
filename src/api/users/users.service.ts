@@ -77,4 +77,12 @@ export class UsersService {
     await this.redis.del(id);
     return this.responseService.createSuccessResponse(null, '删除成功');
   }
+
+  async findUserByUserName(username: string) {
+    const user =  await this.userRepository.findOneBy({ username });
+    if (!user) {
+      throw new HttpException('用户不存在', 400);
+    }
+    return user
+  }
 }
